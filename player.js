@@ -54,6 +54,10 @@ module.exports = {
     console.log("First rank: " + first_card.rank + ":" + first_card_rank)
     console.log("First rank: " + second_card.rank + ":" + second_card_rank)
 
+    stack = our_player.stack
+
+    console.log("Stack: " + stack)
+
     if(first_card.rank == second_card.rank) {
       console.log("Ranks are equal")
       return raise * 2;
@@ -74,7 +78,7 @@ module.exports = {
       return raise;
     }
 
-    if ( first_card_rank > 7 || second_card_rank > 7){
+    if ((first_card_rank > 7 || second_card_rank > 7) && call*2 < stack ){
       console.log("Both cards are > 9")
       return call;
     }
