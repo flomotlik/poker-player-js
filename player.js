@@ -45,8 +45,7 @@ module.exports = {
     console.log("Pre Flop: " + pre_flop);
     console.log("Community Card length: " + community_card_length);
 
-    same_suits = first_card.suits == second_card.suits
-    console.log("Same suits: " + same_suits);
+    same_suits = this.same_suits(first_card, second_card)
 
 
     first_card_rank = this.card_rank(first_card)
@@ -96,6 +95,12 @@ module.exports = {
 
   card_rank: function(card){
     return this.RANKS.indexOf(card.rank)
+  },
+
+  same_suits: function(first_card, second_card){
+    same_suits = first_card.suit == second_card.suit
+    console.log("Same suits: " + same_suits + " Suits: " + first_card.suits + ":" + second_card.suits);
+    return same_suits;
   },
 
   showdown: function(game_state) {
