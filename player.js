@@ -32,20 +32,26 @@ module.exports = {
     second_card = hole_cards[1];
 
     community_cards = game_state.community_cards
-    pre_flop = (community_cards == 0);
+    pre_flop = (community_cards.length == 0);
     post_flop = !pre_flop;
+    console.log("Pre Flop: " + pre_flop);
+
+    same_suits = first_card.suits == second_card.suits
+    console.log("Same suits: " + same_suits);
 
     if(first_card.rank == second_card.rank) {
       return raise * 2;
     }
 
-    same_suits = first_card.suits == second_card.suits
-
     if(pre_flop && same_suits){
       return call;
     }
 
-    if(post_flop && this.same_suits && this.same_suit_cards(first_card.suit, community_cards) >= 4){
+    if(post_flop && same_suits && this.same_suit_cards(first_card.suit, community_cards) >= 3){
+      return 100000000;
+    }
+
+    if(post_flop && same_suits && this.same_suit_cards(first_card.suit, community_cards) >= 2){
       return raise;
     }
 
@@ -63,6 +69,7 @@ module.exports = {
         card_count++;
       }
     });
+    console.log("Card Count: " + card_count);
     return card_count
   },
 

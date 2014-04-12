@@ -45,7 +45,7 @@ describe("Apoker suite", function() {
   });
 
 it("should call if its the same suit at preflop", function() {
-  mockObj.community_cards = 0;
+  mockObj.community_cards = [];
   mockObj.players[mockObj.in_action].hole_cards = [
       {
           "rank": "5",
@@ -58,5 +58,58 @@ it("should call if its the same suit at preflop", function() {
   ];
   expect(player.bet_request(mockObj)).toEqual(240)
 });
+
+it("should raise if >= 4 equal suits", function() {
+  mockObj.players[mockObj.in_action].hole_cards = [
+      {
+          "rank": "5",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "hearts"
+      }
+  ];
+  mockObj.community_cards = [
+      {
+          "rank": "K",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "hearts"
+      }
+  ];
+  expect(player.bet_request(mockObj)).toEqual(480)
+});
+
+it("should raise if >= 4 equal suits", function() {
+  mockObj.players[mockObj.in_action].hole_cards = [
+      {
+          "rank": "5",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "hearts"
+      }
+  ];
+  mockObj.community_cards = [
+      {
+          "rank": "K",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "hearts"
+      }
+  ];
+  expect(player.bet_request(mockObj)).toEqual(100000000)
+});
+
 
 });
