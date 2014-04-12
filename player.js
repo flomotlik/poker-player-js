@@ -60,7 +60,11 @@ module.exports = {
 
     if(first_card.rank == second_card.rank) {
       console.log("Ranks are equal")
-      return raise * 2;
+      if(first_card_rank > 7){
+        return raise* 3
+      }else{
+        return raise
+      }
     }
 
     if(pre_flop && same_suits){
@@ -78,8 +82,13 @@ module.exports = {
       return raise;
     }
 
-    if ((first_card_rank > 7 || second_card_rank > 7) && call*2 < stack ){
+    if ((first_card_rank > 8 && second_card_rank > 8) && call * 2 < stack ){
       console.log("Both cards are > 9")
+      return raise * 2;
+    }
+
+    if ((first_card_rank > 7 || second_card_rank > 7) && call*2 < stack ){
+      console.log("Both cards are > 7")
       return call;
     }
 

@@ -7,12 +7,11 @@ describe("Apoker suite", function() {
 
   beforeEach(function(){
     mockfile = fs.readFileSync('./spec/mock.js').toString()
-    console.log(mockfile)
     mockObj = JSON.parse(mockfile)
     player = require('../player.js');
   })
 
-  it("should raise by twice of the minimum", function() {
+  it("should raise by the minimum", function() {
     mockObj.players[mockObj.in_action].hole_cards = [
         {
             "rank": "6",
@@ -23,7 +22,21 @@ describe("Apoker suite", function() {
             "suit": "spades"
         }
     ];
-    expect(player.bet_request(mockObj)).toEqual(960)
+    expect(player.bet_request(mockObj)).toEqual(480)
+  });
+
+  it("should raise by three times of the minimum if double", function() {
+    mockObj.players[mockObj.in_action].hole_cards = [
+        {
+            "rank": "J",
+            "suit": "hearts"
+        },
+        {
+            "rank": "J",
+            "suit": "spades"
+        }
+    ];
+    expect(player.bet_request(mockObj)).toEqual(1440)
   });
 
   it("should call if one card is a high card and call less than 50% of stack", function() {
@@ -60,6 +73,24 @@ it("should not call with high card if call more than 50% of stack", function() {
       }
   ];
   expect(player.bet_request(mockObj)).toEqual(0)
+});
+
+it("should not call with high card if call more than 50% of stack", function() {
+  our_player = mockObj.players[mockObj.in_action]
+  our_player.stack = 1000;
+  mockObj.current_buy_in = 500;
+  our_player.bet = 1;
+  mockObj.players[mockObj.in_action].hole_cards = [
+      {
+          "rank": "10",
+          "suit": "hearts"
+      },
+      {
+          "rank": "J",
+          "suit": "spades"
+      }
+  ];
+  expect(player.bet_request(mockObj)).toEqual(499)
 });
 
   it("should fold if both are less than 10", function() {
