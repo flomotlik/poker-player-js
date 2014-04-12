@@ -27,7 +27,7 @@ module.exports = {
 
     console.log(raise);
 
-    return 1000;
+    return raise;
   },
 
   showdown: function(game_state) {
