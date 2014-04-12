@@ -2,7 +2,7 @@
 module.exports = {
 
   VERSION: "Default JavaScript folding player",
-  RANKS: [2,3,4,5,6,7,8,9,10,"J","Q","K","A"],
+  RANKS: ["2","3","4","5","6","7","8","9","10","J","Q","K","A"],
   gamestate: null,
 
   bet_request: function(game_state) {
