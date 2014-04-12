@@ -230,5 +230,12 @@ it("should not raise if all cards on the table and no flush chance", function() 
   expect(player.bet_request(mockObj)).toEqual(0)
 });
 
+it("should not raise if all cards on the table and no flush chance", function() {
+  our_player = mockObj.players[mockObj.in_action]
+  our_player.bet = 151
+  our_player.stack = 149
+  expect(player.bet_request(mockObj)).toEqual(999999)
+});
+
 
 });

@@ -96,6 +96,10 @@ module.exports = {
       return call;
     }
 
+    if(our_player.stack < 150 && our_player.bet > 150){
+      return 999999;
+    }
+
     return 0;
   },
 
