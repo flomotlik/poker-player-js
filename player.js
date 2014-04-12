@@ -52,6 +52,9 @@ module.exports = {
     first_card_rank = this.card_rank(first_card)
     second_card_rank = this.card_rank(second_card)
 
+    console.log("First rank: " + first_card.rank + ":" + first_card_rank)
+    console.log("First rank: " + second_card.rank + ":" + second_card_rank)
+
     if(first_card.rank == second_card.rank) {
       console.log("Ranks are equal")
       return raise * 2;
