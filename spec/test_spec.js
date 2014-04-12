@@ -111,5 +111,41 @@ it("should raise if >= 4 equal suits", function() {
   expect(player.bet_request(mockObj)).toEqual(100000000)
 });
 
+it("should not raise if all cards on the table and no flush chance", function() {
+  mockObj.players[mockObj.in_action].hole_cards = [
+      {
+          "rank": "5",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "hearts"
+      }
+  ];
+  mockObj.community_cards = [
+      {
+          "rank": "K",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "spades"
+      },
+      {
+          "rank": "6",
+          "suit": "spades"
+      },
+      {
+          "rank": "6",
+          "suit": "spades"
+      }
+  ];
+  expect(player.bet_request(mockObj)).toEqual(0)
+});
+
 
 });

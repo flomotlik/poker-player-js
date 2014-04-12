@@ -33,9 +33,12 @@ module.exports = {
     second_card = hole_cards[1];
 
     community_cards = game_state.community_cards
-    pre_flop = (community_cards.length == 0);
+    community_card_length = community_cards.length
+    pre_flop = ( community_card_length == 0);
     post_flop = !pre_flop;
+    river = community_card_length == 5;
     console.log("Pre Flop: " + pre_flop);
+    console.log("Community Card length: " + community_card_length);
 
     same_suits = first_card.suits == second_card.suits
     console.log("Same suits: " + same_suits);
@@ -55,12 +58,10 @@ module.exports = {
       return 100000000;
     }
 
-    if(post_flop && same_suits && this.same_suit_cards(first_card.suit, community_cards) >= 2){
+    if(!river && same_suits && this.same_suit_cards(first_card.suit, community_cards) >= 2){
       console.log("Preflop with Flush chance")
       return raise;
     }
-
-
 
     if (this.RANKS.indexOf(first_card.rank) > 7 || this.RANKS.indexOf(second_card.rank) > 7){
       console.log("Both cards are > 9")
