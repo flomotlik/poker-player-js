@@ -20,8 +20,8 @@ module.exports = {
 
     raise = game_state.current_buy_in - players[in_action][bet] + minimum_raise;
 
-    console.log raise;
-    
+    console.log(raise);
+
     return raise;
   },
 
