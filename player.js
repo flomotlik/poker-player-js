@@ -98,8 +98,10 @@ module.exports = {
   },
 
   same_suits: function(first_card, second_card){
-    same_suits = first_card.suit == second_card.suit
-    console.log("Same suits: " + same_suits + " Suits: " + first_card.suits + ":" + second_card.suits);
+    first_suit = first_card.suit
+    second_suit = second_card.suit
+    same_suits = first_suit == second_suit && first_suit != undefined && second_suit != undefined
+    console.log("Same suits: " + same_suits + " Suits: " + first_suit + ":" + second_suit);
     return same_suits;
   },
 
