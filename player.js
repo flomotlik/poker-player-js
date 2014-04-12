@@ -58,6 +58,10 @@ module.exports = {
 
     console.log("Stack: " + stack)
 
+    if(this.has_triple(hole_cards.concat(community_cards))){
+      return raise * 4;
+    }
+
     if(first_card.rank == second_card.rank) {
       console.log("Ranks are equal")
       if(first_card_rank > 7){
@@ -104,6 +108,23 @@ module.exports = {
     });
     console.log("Card Count: " + card_count);
     return card_count
+  },
+
+  has_triple: function(cards){
+    is_triple = false
+    this.RANKS.forEach(function(rank){
+      rank_count = 0;
+      cards.forEach(function(card){
+        if(card.rank == rank){
+          rank_count++;
+        }
+      })
+      if(rank_count > 2){
+       is_triple = true;
+      }
+    })
+
+    return is_triple;
   },
 
   card_rank: function(card){

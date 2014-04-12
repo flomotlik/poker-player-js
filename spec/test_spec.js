@@ -39,6 +39,26 @@ describe("Apoker suite", function() {
     expect(player.bet_request(mockObj)).toEqual(1440)
   });
 
+  it("should raise by four times if triplet", function() {
+    mockObj.players[mockObj.in_action].hole_cards = [
+        {
+            "rank": "J",
+            "suit": "hearts"
+        },
+        {
+            "rank": "J",
+            "suit": "spades"
+        }
+    ];
+    mockObj.community_cards = [
+        {
+            "rank": "J",
+            "suit": "hearts"
+        }
+    ];
+    expect(player.bet_request(mockObj)).toEqual(1920)
+  });
+
   it("should call if one card is a high card and call less than 50% of stack", function() {
     our_player = mockObj.players[mockObj.in_action]
     our_player.stack = 1000;
@@ -167,7 +187,7 @@ it("should raise if >= 4 equal suits", function() {
           "suit": "hearts"
       },
       {
-          "rank": "6",
+          "rank": "7",
           "suit": "hearts"
       }
   ];
@@ -195,15 +215,15 @@ it("should not raise if all cards on the table and no flush chance", function() 
           "suit": "hearts"
       },
       {
-          "rank": "6",
+          "rank": "7",
           "suit": "spades"
       },
       {
-          "rank": "6",
+          "rank": "8",
           "suit": "spades"
       },
       {
-          "rank": "6",
+          "rank": "9",
           "suit": "spades"
       }
   ];
