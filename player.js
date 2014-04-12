@@ -4,7 +4,7 @@ module.exports = {
   VERSION: "Default JavaScript folding player",
 
   bet_request: function(game_state) {
-    game_state = JSON.parse(game_state);
+    if (typeof(game_state) !== 'object') game_state = JSON.parse(game_state);
 
     players = game_state.players
     our_player = game_state.players[game_state.in_action]
