@@ -18,7 +18,11 @@ module.exports = {
 
     minimum_raise = game_state.minimum_raise
 
-    return game_state.current_buy_in - players[in_action][bet] + minimum_raise;
+    raise = game_state.current_buy_in - players[in_action][bet] + minimum_raise;
+
+    console.log raise;
+    
+    return raise;
   },
 
   showdown: function(game_state) {
