@@ -91,7 +91,7 @@ module.exports = {
       return raise * 2;
     }
 
-    if ((first_card_rank > 7 || second_card_rank > 7) && call*2 < stack ){
+    if ((first_card_rank > 7 || second_card_rank > 7) && call*2 < stack && call < 300){
       console.log("Both cards are > 7")
       return call;
     }

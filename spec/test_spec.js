@@ -62,7 +62,7 @@ describe("Apoker suite", function() {
   it("should call if one card is a high card and call less than 50% of stack", function() {
     our_player = mockObj.players[mockObj.in_action]
     our_player.stack = 1000;
-    mockObj.current_buy_in = 500;
+    mockObj.current_buy_in = 300;
     our_player.bet = 1;
     mockObj.players[mockObj.in_action].hole_cards = [
         {
@@ -74,7 +74,7 @@ describe("Apoker suite", function() {
             "suit": "spades"
         }
     ];
-    expect(player.bet_request(mockObj)).toEqual(499)
+    expect(player.bet_request(mockObj)).toEqual(299)
   });
 
 it("should not call with high card if call more than 50% of stack", function() {
@@ -99,6 +99,24 @@ it("should not call with high card if call more than 50% of stack", function() {
   our_player = mockObj.players[mockObj.in_action]
   our_player.stack = 1000;
   mockObj.current_buy_in = 500;
+  our_player.bet = 0;
+  mockObj.players[mockObj.in_action].hole_cards = [
+      {
+          "rank": "K",
+          "suit": "hearts"
+      },
+      {
+          "rank": "6",
+          "suit": "spades"
+      }
+  ];
+  expect(player.bet_request(mockObj)).toEqual(0)
+});
+
+it("should not call with high card and call more than 300", function() {
+  our_player = mockObj.players[mockObj.in_action]
+  our_player.stack = 1000;
+  mockObj.current_buy_in = 301;
   our_player.bet = 1;
   mockObj.players[mockObj.in_action].hole_cards = [
       {
@@ -106,11 +124,11 @@ it("should not call with high card if call more than 50% of stack", function() {
           "suit": "hearts"
       },
       {
-          "rank": "J",
+          "rank": "4",
           "suit": "spades"
       }
   ];
-  expect(player.bet_request(mockObj)).toEqual(499)
+  expect(player.bet_request(mockObj)).toEqual(0)
 });
 
   it("should fold if both are less than 10", function() {
