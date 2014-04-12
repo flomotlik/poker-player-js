@@ -3,10 +3,14 @@ module.exports = {
 
   VERSION: "Default JavaScript folding player",
   RANKS: [2,3,4,5,6,7,8,9,10,"J","Q","K","A"],
+  gamestate: null,
 
   bet_request: function(game_state) {
     console.log("\n\n\nNew round")
+
     if (typeof(game_state) !== 'object') game_state = JSON.parse(game_state);
+
+    this.gamestate = game_state
 
     players = game_state.players
     our_player = game_state.players[game_state.in_action]
@@ -37,11 +41,16 @@ module.exports = {
     pre_flop = ( community_card_length == 0);
     post_flop = !pre_flop;
     river = community_card_length == 5;
+
     console.log("Pre Flop: " + pre_flop);
     console.log("Community Card length: " + community_card_length);
 
     same_suits = first_card.suits == second_card.suits
     console.log("Same suits: " + same_suits);
+
+
+    first_card_rank = this.card_rank(first_card)
+    second_card_rank = this.card_rank(second_card)
 
     if(first_card.rank == second_card.rank) {
       console.log("Ranks are equal")
@@ -63,7 +72,7 @@ module.exports = {
       return raise;
     }
 
-    if (this.RANKS.indexOf(first_card.rank) > 7 || this.RANKS.indexOf(second_card.rank) > 7){
+    if ( first_card_rank > 7 || second_card_rank > 7){
       console.log("Both cards are > 9")
       return call;
     }
@@ -80,6 +89,10 @@ module.exports = {
     });
     console.log("Card Count: " + card_count);
     return card_count
+  },
+
+  card_rank: function(card){
+    return this.RANKS.indexOf(card.rank)
   },
 
   showdown: function(game_state) {
