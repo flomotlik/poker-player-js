@@ -5,6 +5,7 @@ module.exports = {
   RANKS: [2,3,4,5,6,7,8,9,10,"J","Q","K","A"],
 
   bet_request: function(game_state) {
+    console.log("\n\n\nNew round")
     if (typeof(game_state) !== 'object') game_state = JSON.parse(game_state);
 
     players = game_state.players
@@ -40,22 +41,29 @@ module.exports = {
     console.log("Same suits: " + same_suits);
 
     if(first_card.rank == second_card.rank) {
+      console.log("Ranks are equal")
       return raise * 2;
     }
 
     if(pre_flop && same_suits){
+      console.log("Preflop and same suits")
       return call;
     }
 
     if(post_flop && same_suits && this.same_suit_cards(first_card.suit, community_cards) >= 3){
+      console.log("Post Flop Flush")
       return 100000000;
     }
 
     if(post_flop && same_suits && this.same_suit_cards(first_card.suit, community_cards) >= 2){
+      console.log("Preflop with Flush chance")
       return raise;
     }
 
+
+
     if (this.RANKS.indexOf(first_card.rank) > 7 || this.RANKS.indexOf(second_card.rank) > 7){
+      console.log("Both cards are > 9")
       return call;
     }
 
